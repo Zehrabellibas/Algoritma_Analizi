@@ -1,0 +1,47 @@
+def getModeMedian(list_1):
+    n = len(list_1)
+    size = len(list_1)
+    frekans = 1
+    frekans_max = -1
+    
+     #Listeyi sıraladık.
+    for i in range(n-1, -1, -1): #Bu for'un kapsadığı alanın karmaşıklığı, n.(13i) -> 13n2 -> n2 
+        for j in range(0, i): # for döngüsünün karmaşıklığı 13i'dir.
+            if list_1[j+1] < list_1[j]: #4
+                temp = list_1[j+1] #3
+                list_1[j+1] = list_1[j] #4
+                list_1[j] = temp #2
+    print("Sirali liste : ", list_1)
+    
+    #Median bulundu.
+    if size%2 == 1: 
+        mid = int(size/2) #3
+        median = list_1[mid] #2
+        print("Median : ", median)
+    else: #Bu else'in karmaşıklığı, 10.
+        mid_1 = list_1[int(size/2)] #3
+        mid_2 = list_1[int(size/2) + 1] #4
+        median = (mid_1 + mid_2) / 2 #3
+        print ("Median : ", median)
+        
+    #Mod bulundu.
+    for k in range(0, n-1):
+        if list_1[k] == list_1[k+1]: #5
+            deger = list_1[k] #2
+            frekans = frekans + 1 #2
+            if(frekans > frekans_max): #2
+                frekans_max = frekans #1
+        else:
+            frekans = 1 #1
+    print("Mod : ", deger)
+
+
+
+liste = [1, 7, 9, -3, 7, 7, 7, 6, 5, -11, 3, 1, 7]
+getModeMedian(liste)
+
+
+Çıktı->
+('Sirali liste : ', [-11, -3, 1, 1, 3, 5, 6, 7, 7, 7, 7, 7, 9])
+('Median : ', 6)
+('Mod : ', 7)
